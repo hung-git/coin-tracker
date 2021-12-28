@@ -5,6 +5,7 @@ import { CryptoState } from '../CryptoContext'
 import { Container, createTheme, LinearProgress, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { priceWithCommas } from './banner/Carousel'
+import { Pagination } from '@material-ui/lab'
 
 // export function priceWithCommas(x) {
 //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -14,6 +15,7 @@ const CoinTable = () => {
   const [coins, setCoins] = useState([])
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
+  const [page, setPage] = useState(1)
 
   const history = useHistory()
 
@@ -28,6 +30,11 @@ const CoinTable = () => {
       },
       fontFamily: "Montserrat",
     },
+    pagination: {
+      "& .MuiPaginationItem-root": {
+        color: "gold",
+      },
+    }
   }))
   
   const classes = useStyles();
@@ -91,8 +98,10 @@ const CoinTable = () => {
             </TableHead>
             <TableBody>
               {/* Body goes here */}
-              {handleSearch().map((coin) => {
-                const profit = coin.price_change_percentage_24h > 0
+              {handleSearch()
+                .slice((page - 1) * 10, (page - 1) * 10 + 10)
+                .map((coin) => {
+                  const profit = coin.price_change_percentage_24h > 0
 
                 return (
                   <TableRow 
@@ -123,6 +132,11 @@ const CoinTable = () => {
           </Table> )
          }
        </TableContainer>
+       <Pagination count={(handleSearch()?.length / 10).toFixed(0)} style={{ padding: 20, width: "100%", display: "flex", justifyContent: "center", }} classes={{ ul: classes.pagination }} 
+        onChange={(_, value) => { 
+          setPage(value)
+          window.scroll(0, 450)
+        }}/>
      </Container>
    </ThemeProvider>
   )
