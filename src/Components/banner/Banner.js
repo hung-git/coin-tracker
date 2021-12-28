@@ -16,10 +16,11 @@ const useStyles = makeStyles(() => ({
   },
   bannerTitle: {
     display: 'flex',
-    height: '40%',
+    // height: '40%',
     flexDirection: 'column',
     justifyContent: 'center',
     // textAlign: 'center',
+    // alignItems: 'center'
   },
 }))
 
