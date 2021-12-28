@@ -116,13 +116,13 @@ const CoinTable = () => {
                         <span style={{ color: "darkgrey" }}>{coin.name}</span>
                       </div>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" style={{fontSize: 16}}>
                       {symbol} {priceWithCommas(coin.current_price.toFixed(2))}
                     </TableCell>
-                    <TableCell align="right" style={{ color: profit > 0 ? "rgb(14, 203, 129)" : "red", fontWeight: 500 }}>
+                    <TableCell align="right" style={{ color: profit > 0 ? "rgb(14, 203, 129)" : "red", fontWeight: 500, fontSize: 16 }}>
                       {profit && "+"} {coin?.price_change_percentage_24h?.toFixed(2)}%
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" style={{fontSize: 16}}>
                       {symbol} {priceWithCommas(coin.market_cap.toFixed(2))}
                     </TableCell>
                   </TableRow>
